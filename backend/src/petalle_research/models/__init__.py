@@ -1,0 +1,1 @@
+from petalle_research.models import clothes_models, collection_models

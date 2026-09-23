@@ -12,5 +12,5 @@ class Clothes(SQLModel, table=True):
     @property
     def size_str(self) -> str:
         return estimate_clothe_size(self.size_num)
-    price: Decimal = Field(max_digits=3, decimal_places=2)
+    price: Decimal = Field(max_digits=6, decimal_places=2)
 

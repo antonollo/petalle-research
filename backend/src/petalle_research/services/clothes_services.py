@@ -16,10 +16,22 @@ def get_clothe_by_id(clothe_id: int, session: Session) -> Clothes | None:
 
 
 def register_clothe(data: ClothesForms, session: Session) -> Clothes:
-    new_clothe = Clothes.model_validate(data)
+    statement = select(Collection).where(Collection.name == data.collection_name)
+    collection = session.exec(statement).first()
+    if not collection:
+        collection = Collection(name=data.collection_name)
+        session.add(collection)
+        session.commit()
+        session.refresh(collection)
+    assert collection.id is not None
+    new_clothe = Clothes.model_validate(
+        {**data.model_dump(), "collection_id": collection.id}
+    )
+
     session.add(new_clothe)
     session.commit()
     session.refresh(new_clothe)
+
     return new_clothe
 
 

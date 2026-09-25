@@ -25,7 +25,7 @@ def register_clothe(data: ClothesForms, session: Session) -> Clothes:
         session.refresh(collection)
     assert collection.id is not None
     new_clothe = Clothes.model_validate(
-        {**data.model_dump(), "collection_id": collection.id}
+        {**data.model_dump(), "collection_name": collection.name}
     )
 
     session.add(new_clothe)

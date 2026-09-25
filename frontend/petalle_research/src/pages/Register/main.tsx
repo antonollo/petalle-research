@@ -1,29 +1,26 @@
 import { useNavigate } from "react-router-dom";
 import { useCallback, useState } from "react";
 import Card from "../../layouts/Card";
-import type { Clothe } from "../../types/Clothe";
+import type { ClotheForms } from "../../types/Clothe";
+import { registerClothe } from "../../services/clotheService";
 
 const Register = () => {
   const [clotheName, setClotheName] = useState("");
-  const [collectionName, setCollection] = useState("");
+  const [collectionName, setCollection] = useState("Yasmim");
   const [clotheColor, setClotheColor] = useState("");
   const [clotheSize, setClotheSize] = useState(20);
   const [clothePrice, setClothePrice] = useState(200);
   const [clotheInfo, setClotheInfo] = useState({
     name: "",
-    collection: "",
+    collection_name: "",
     color: "",
-    size: 0,
+    size_num: 0,
     price: 0,
   });
   const navigate = useNavigate();
-  const handleSubmit = useCallback((clotheInfo: Clothe) => {
-    const clothes = localStorage.getItem("clothes");
-    let clothesList: Array<Clothe> = clothes ? JSON.parse(clothes) : [];
-    clothesList.push(clotheInfo);
-    localStorage.setItem("clothes", JSON.stringify(clothesList));
-    navigate("/");
-  }, []);
+  const handleSubmit = async (clotheInfo: ClotheForms) => {
+    await registerClothe(clotheInfo);
+  };
 
   return (
     <Card
@@ -33,7 +30,10 @@ const Register = () => {
       <form
         action=""
         className="flex flex-col gap-2 w-full"
-        onSubmit={() => handleSubmit(clotheInfo)}
+        onSubmit={() => {
+          handleSubmit(clotheInfo);
+          navigate("/");
+        }}
       >
         <label htmlFor="name">Nome do Vestido: </label>
         <input
@@ -51,6 +51,7 @@ const Register = () => {
           id="collection"
           className="focus:outline-none bg-hovering p-2 rounded-md text-white mb-4"
           onChange={(e) => setCollection(e.target.value)}
+          defaultValue={"Yasmim"}
         >
           <option value="Yasmim">Yasmim</option>
           <option value="Petalle 2026">Petalle 2026</option>
@@ -76,7 +77,6 @@ const Register = () => {
           required
           onChange={(e) => setClotheSize(Number(e.target.value))}
           value={clotheSize}
-          defaultValue={0}
           min={20}
           max={50}
         />
@@ -100,14 +100,14 @@ const Register = () => {
           onClick={() =>
             setClotheInfo({
               name: clotheName,
-              collection: collectionName,
+              collection_name: collectionName,
               color: clotheColor,
-              size: clotheSize,
+              size_num: clotheSize,
               price: clothePrice,
             })
           }
         >
-          Registrar novo vestido/acessório
+          Registrar novo vestido/acessório.
         </button>
       </form>
       <button

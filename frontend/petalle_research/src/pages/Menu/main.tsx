@@ -12,18 +12,6 @@ const Menu = () => {
           Adicionar novo vestido e/ou acessório.
         </Link>
         <Link
-          to="/update"
-          className="bg-hovering rounded-md p-3 cursor-pointer transition-colors duration-200 hover:shadow-black hover:shadow-md hover:bg-black hover:text-main"
-        >
-          Modificar informações de vestido e/ou acessório.
-        </Link>
-        <Link
-          to="/delete"
-          className="bg-hovering rounded-md p-3 cursor-pointer transition-colors duration-200 hover:shadow-black hover:shadow-md hover:bg-black hover:text-main"
-        >
-          Deletar informações de um vestido e/ou acessório.
-        </Link>
-        <Link
           to="/list"
           className="bg-hovering rounded-md p-3 cursor-pointer transition-colors duration-200 hover:shadow-black hover:shadow-md hover:bg-black hover:text-main"
         >

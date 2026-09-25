@@ -10,7 +10,6 @@ import Layout from "./Layout.tsx";
 import Menu from "./pages/Menu/main.tsx";
 import Register from "./pages/Register/main.tsx";
 import Update from "./pages/Update/main.tsx";
-import Delete from "./pages/Delete/main.tsx";
 import List from "./pages/List/main.tsx";
 
 
@@ -19,8 +18,7 @@ const router = createBrowserRouter(
     <Route path="" element={<Menu/>}></Route>
     <Route path="/list" element={<List/>}></Route>
     <Route path="/register" element={<Register/>}></Route>
-    <Route path="/update" element={<Update/>}></Route>
-    <Route path="/delete" element={<Delete/>}></Route>
+    <Route path="/update/:id" element={<Update/>}></Route>
   </Route>)
 );
 

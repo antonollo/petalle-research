@@ -6,7 +6,7 @@ from petalle_research.utils.estimate_clothe_size import estimate_clothe_size
 class Clothes(SQLModel, table=True):
     id: Optional[int] = Field(default=None, primary_key=True)
     name: str
-    collection_id: int = Field(foreign_key="collection.id")
+    collection_name: str = Field(foreign_key="collection.name")
     color: str
     size_num: int
     @property
